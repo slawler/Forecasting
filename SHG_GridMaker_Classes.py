@@ -51,7 +51,7 @@ class Grid(object):
         lats, lons  = self.dec_lats(), self.dec_lons()
         for y in lats:
             rowname = self.DecDeg2SHG(lons[0],y)
-            rows.append(rowname[0])
+            rows.append(rowname[1])
         return array(rows)
 
 
