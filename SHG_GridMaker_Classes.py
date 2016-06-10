@@ -1,18 +1,21 @@
+from netCDF4 import Dataset
 from pyproj import Proj
 from numpy import floor as flr
 from numpy import array
+
+
 class Grid(object):
    
     def __init__(self, grid):
         self.grid = grid
         
     def dec_lats(self):   
-        f = Dataset(nc_file,'r')
+        f = Dataset(self.grid,'r')
         lats   = f.variables['Latitude'][:]
         return lats
     
     def dec_lons(self):   
-        f = Dataset(nc_file,'r')
+        f = Dataset(self.grid,'r')
         lons   = f.variables['Longitude'][:]
         return lons
         
@@ -32,12 +35,7 @@ class Grid(object):
         x, y  = self.proj_shift(i,j)
         grid_x, grid_y  = int(flr(x)/250),int(flr(1)/250)  
         return grid_x, grid_y  
-'''      
-    def GridCoords(self): 
-        lats, lons  = self.dec_lats(), self.dec_lons()
-        x,y = self.DecDeg2SHG(min(lons), min(lats))   
-        return x,y  
-'''        
+ 
     def columns(self): 
         cols= []
         lats, lons  = self.dec_lats(), self.dec_lons()
@@ -53,7 +51,3 @@ class Grid(object):
             rowname = self.DecDeg2SHG(lons[0],y)
             rows.append(rowname[1])
         return array(rows)
-
-
-        
-  
