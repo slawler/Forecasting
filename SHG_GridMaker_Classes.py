@@ -64,3 +64,23 @@ class Grid(object):
 
 nc = '29May2015_071200_10min.nc'
 g = Grid(nc,500)
+'''    def proj_shift(self,i,j):
+        phi, rho= -96.2425*(pi/180),33.602501*(pi/180)
+        
+        lda_0, phi_0 = 37.5*(pi/180), -96.0*(pi/180)
+        phi_1, phi_2 =29.5*(pi/180), 45.5*(pi/180)
+        
+        n	    =	0.5*(sin(phi_1)+sin(phi_2))	
+        theta   = 	n*(lda-lda_0)	
+        C	     =cos(phi_1**2)+2*n*sin(phi_1)	
+        rho     =	(sqrt(C-2*n*sin(phi)))/n	
+        rho_0   =	(sqrt(C-2*n*sin(phi_0)))/n
+        
+        
+        x	=	rho*sin(theta)	
+        y	=	rho_0-rho*cos(theta)
+        
+        
+        print x*100000,y*100000
+        proj_x, proj_y  = x,y        
+        return proj_x, proj_y '''
