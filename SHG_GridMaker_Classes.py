@@ -1,3 +1,4 @@
+
 from netCDF4 import Dataset
 from pyproj import Proj
 from numpy import floor as flr
@@ -21,7 +22,7 @@ class Grid(object):
         
     def LowerLeft_LatLon(self): 
         lats, lons  = self.dec_lats(), self.dec_lons()
-        xmin,ymin = min(lats), min(lons)
+        xmin,ymin = min(lons), min(lats)
         return xmin, ymin
               
     def proj_shift(self,i,j):
@@ -49,5 +50,5 @@ class Grid(object):
         lats, lons  = self.dec_lats(), self.dec_lons()
         for y in lats:
             rowname = self.DecDeg2SHG(lons[0],y)
-            rows.append(rowname[1])
+            rows.append(rowname[0])
         return array(rows)
