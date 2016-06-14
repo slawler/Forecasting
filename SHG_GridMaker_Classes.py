@@ -64,23 +64,25 @@ class Grid(object):
 
 nc = '29May2015_071200_10min.nc'
 g = Grid(nc,500)
-'''    def proj_shift(self,i,j):
-        phi, rho= -96.2425*(pi/180),33.602501*(pi/180)
+'''     def ToAlbers(i,j):
+        from numpy import pi,sin,cos,log
+        rad = pi/180
+        phi,lda = j*rad,i*rad        
+        elipsoid,e,e2 = 6378137.0,0.0822719,0.00676866
+        phi0, phi1, phi2 =23.0*rad, 29.5*rad,45.5*rad
+        lda0= -96.0*rad
+        m1=cos(phi1)/(1-e2*sin(phi1)**2)**0.5
+        m2=cos(phi2)/(1-e2*sin(phi2)**2)**0.5           
+        def q_fun(var):
+            q=(1-e2)*(sin(var)/(1-e2*sin(var)**2))-((1/(2*e))*log((1-e*sin(var))/(1+e*sin(var))))
+            return q
+            
+        q,q0 ,q1,q2= q_fun(phi),q_fun(phi0),q_fun(phi1),q_fun(phi2)              
+        n=(m1**2-m2**2)/(q2-q1)
+        C=m1**2 +n*q1
+        p, p0 =(elipsoid *(C -n*q)**0.5)/n,elipsoid *((C-n*q0)**0.5)/n 
+        theta = n*(lda- lda0)        
+        x,y = p*sin(theta),p0-p*cos(theta)
+        return x,y  
         
-        lda_0, phi_0 = 37.5*(pi/180), -96.0*(pi/180)
-        phi_1, phi_2 =29.5*(pi/180), 45.5*(pi/180)
-        
-        n	    =	0.5*(sin(phi_1)+sin(phi_2))	
-        theta   = 	n*(lda-lda_0)	
-        C	     =cos(phi_1**2)+2*n*sin(phi_1)	
-        rho     =	(sqrt(C-2*n*sin(phi)))/n	
-        rho_0   =	(sqrt(C-2*n*sin(phi_0)))/n
-        
-        
-        x	=	rho*sin(theta)	
-        y	=	rho_0-rho*cos(theta)
-        
-        
-        print x*100000,y*100000
-        proj_x, proj_y  = x,y        
-        return proj_x, proj_y '''
+ '''
