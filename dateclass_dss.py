@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jun  7 21:05:35 2016
-
 @author: slawler
 """
 
 from datetime import datetime, timedelta
 from re import findall
 from ast import literal_eval
-
-nc_file
 
 class dssWriter:
 
@@ -30,7 +27,7 @@ class dssWriter:
         interval = findall('\d+|\D+', str(f[2][:-3]))
         scalar, unit = interval[0], interval[1]
 
-        if unit == 'min':
+        if unit == 'min.':
             unit = 'minutes'
         elif unit == 'hour':
             unit = 'hours'
@@ -57,6 +54,6 @@ class dssWriter:
         #nextline     = '\n'
         dss_string = command + self.name + dss + DSSNAME + path +info #+ nextline
         return dss_string
-
-
-
+        
+        
+a = dssWriter(nfile)       
