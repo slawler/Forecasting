@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jun 14 21:30:13 2016
-
 Description:
 Input:
 Output:
-
 @author: sml
 """
 #------------Import Python Modules-----------#
@@ -20,7 +18,7 @@ from pandas import DataFrame
 
 class Grid(object):
 
-    def __init__(self, grid, coords, cellsize):     
+    def __init__(self, grid, coords, cellsize):
         self.grid = grid
         self.coords = coords
         self.cellsize = cellsize
@@ -130,26 +128,20 @@ class Grid(object):
         grid       = self.DSSgrid()
         ncols       = len(self.columns())
         nrows       = len(self.rows())
-        x_cd, y_cd = self.toSHG(self.coords[0],self.coords[1])
         cellsize   = self.cellsize
+        x_cd, y_cd = self.toSHG(self.coords[0],self.coords[1])
         NODATA     = -9999
         ascFile    = '%s.asc' %(name.split('.')[0])
         with open(ascFile,'w') as newfile:
             newfile.write('NCOLS '+ str(ncols)+ '\n')
             newfile.write('NROWS '+ str(nrows)+ '\n')
-            newfile.write('XLLCORNER '+ str(x_cd)+ '\n')
-            newfile.write('YLLCORNER '+ str(y_cd)+ '\n')
+            newfile.write('XLLCORNER '+ str(x_cd*cellsize)+ '\n')
+            newfile.write('YLLCORNER '+ str(y_cd*cellsize)+ '\n')
             newfile.write('CELLSIZE '+ str(cellsize)+ '\n')
             newfile.write('NODATA_VALUE '+ str(NODATA)+ '\n')
         
         grid.to_csv(ascFile, sep = ' ', float_format ='%.6f',
                        header = False, index = False, mode = 'a')
-        print('Congratulations: You Just Wrote An ASCII File for: %s' %(name))
         return ascFile
-
-
-coords = (-96.9635,32.6258,-96.2579,33.1449)
-nfile = '29May2015_030800_10min.nc'
-g= Grid(nfile,coords,500)
 
 
