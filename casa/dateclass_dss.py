@@ -50,10 +50,7 @@ class dssWriter:
         dss          = ' dss='
         DSSNAME      = self.date().strftime('%b%Y')+'.dss'
         path         = ' path='
-        info         = '/SHG/CASA/PRECIP/%s/%s/Import'%(self.dss_start(),self.dss_stop())
+        info         = '/SHG/CASA/PRECIP/%s/%s/Import/'%(self.dss_start(),self.dss_stop())
         #nextline     = '\n'
         dss_string = command + self.name + dss + DSSNAME + path +info #+ nextline
         return dss_string
-        
-        
-a = dssWriter(nfile)       
