@@ -1,0 +1,4 @@
+from hms.model.JythonHms import *
+OpenProject("JAWRA", "C:\\Users\\slawler\\Desktop\\JAWRACASA")
+Compute("RunCasa")
+Exit(1)
